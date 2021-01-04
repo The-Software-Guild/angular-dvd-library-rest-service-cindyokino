@@ -21,8 +21,13 @@
             {{ dvd.title }}
           </a>
         </td>
-        <td>{{ dvd.wordcount }}</td>
-        <td [innerHTML]="dvd.snippet"></td>
+        <td>{{ dvd.releaseYear }}</td>
+        <td>{{ dvd.director }}</td>
+        <td>{{ dvd.rating }}</td>
+        <td>
+          <a href="#editDvd" ng-click="edit(dvd.id)" class="btn btn-outline-secondary btn-sm">Edit</a>               
+          <a href="#deleteDvd" ng-click="remove(dvd.id)" class="btn btn-danger btn-sm">Delete</a>
+        </td>
       </tr>
     </tbody>
   </table>

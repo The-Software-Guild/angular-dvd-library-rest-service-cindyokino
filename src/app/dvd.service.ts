@@ -9,16 +9,24 @@ export class DvdService {
 
   constructor(private http: HttpClient) { }
 
-  public search(term: string) {
-    return this.http.get('http://localhost:8080/', {
-      params: {
-        action: 'query',
-        format: 'json',
-        list: 'search',
-        utf8: '1',
-        srsearch: term,
-        origin: '*'
-      }
-    });
+  public searchById(term: string) {
+    return this.http.get('http://localhost:8080/dvdapi/dvd/' + term);   
   }
+
+  public searchByTitle(term: string) {
+    return this.http.get('http://localhost:8080/dvdapi/dvds/title/' + term);
+  }
+
+  public searchByReleaseYear(term: string) {
+    return this.http.get('http://localhost:8080/dvds/year/' + term);
+  }
+
+  public searchByDirectorName(term: string) {
+    return this.http.get('http://localhost:8080/dvds/director/' + term);
+  }
+
+  public searchByRating(term: string) {
+    return this.http.get('http://localhost:8080/dvdapi/dvds/rating/' + term);
+  }
+
 }
