@@ -18,11 +18,11 @@ export class DvdService {
   }
 
   public searchByReleaseYear(term: string) {
-    return this.http.get('http://localhost:8080/dvds/year/' + term);
+    return this.http.get('http://localhost:8080/dvdapi/dvds/year/' + term);
   }
 
   public searchByDirectorName(term: string) {
-    return this.http.get('http://localhost:8080/dvds/director/' + term);
+    return this.http.get('http://localhost:8080/dvdapi/dvds/director/' + term);
   }
 
   public searchByRating(term: string) {

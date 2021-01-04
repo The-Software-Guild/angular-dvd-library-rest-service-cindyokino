@@ -12,39 +12,34 @@ export class AppComponent {
   title = 'Dvd Library Search';
   @ViewChild('f', { static: false }) searchForm: NgForm;
   submitted = false;
-  selectedCategory = "";
 
   dvds = [];
 
   constructor(private dvd: DvdService) {}
 
-  onTerm(term: string) {
+  onTerm(eventData: any) {
 
-  //   switch (this.selectedCategory) { 
-  //     case "title":
-  //       this.dvd.searchByTitle(term).subscribe((response: any) => {
-  //         this.dvds = response;
-  //       });
-  //         break;
-  //     case "year":
-  //       this.dvd.searchByReleaseYear(term).subscribe((response: any) => {
-  //         this.dvds = response;
-  //       });
-  //         break;
-  //     case "director":
-  //       this.dvd.searchByDirectorName(term).subscribe((response: any) => {
-  //         this.dvds = response;
-  //       });
-  //         break;
-  //     case "rating":
-  //       this.dvd.searchByRating(term).subscribe((response: any) => {
-  //         this.dvds = response;
-  //       });
-  //     break;
-  // }
-
-    this.dvd.searchByTitle(term).subscribe((response: any) => {
-      this.dvds = response;
-    });
+    switch (eventData.selectedCategory) { 
+      case "title":
+        this.dvd.searchByTitle(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "year":
+        this.dvd.searchByReleaseYear(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "director":
+        this.dvd.searchByDirectorName(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "rating":
+        this.dvd.searchByRating(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+      break;
+    }
   }
 }

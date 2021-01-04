@@ -2,45 +2,51 @@
     <div class="col-12" id='formInput'>
         <form (submit)="onFormSubmit($event)" #f="ngForm">
 
-        <div class="row">
-
-            <div class="col-md-3">
-                <button type="button" class="btn btn-primary">Create DVD</button>    
+            <div
+                id="search-data"
+                ngModelGroup="searchData"
+                #userData="ngModelGroup"
+                class="row">
+                
+                <div class="form-group col-md-5">
+                    <button type="button" class="btn btn-primary">Create DVD</button>    
+                </div>
+                
+                <div class="form-group col-md-3">
+                    <select
+                        id="selectCategory"
+                        class="form-control"            
+                        name="selectCategory"
+                        [(ngModel)]="selectedCategory"
+                        (change)="onChange($event.target.value)"
+                        required>
+                        <option value="" selected disabled>Select category</option>
+                        <option value="{{o.value}}" *ngFor="let o of categoryOptions">{{ o.name }}</option>
+                    </select>
+                </div> <!-- formgroup: selectCategory -->
+                
+                <div class="form-group col-md-3">
+                    <input
+                        type="text"
+                        id="searchTerm"
+                        class="form-control"
+                        ngModel
+                        name="searchTerm"
+                        required 
+                        (input)="term = $event.target.value"
+                        #searchTerm="ngModel">
+                    <span class="help-block" *ngIf="!searchTerm.valid && searchTerm.touched">Please enter a search term!</span>
+                </div> <!-- formgroup: searchTerm -->     
+                
+                <div  class="form-group col-md-1">
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                        [disabled]="!f.valid">Search
+                    </button>
+                </div>
             </div>
 
-            <div class="form-group col-md-3">
-                <select
-                    id="selectCategory"
-                    class="form-control"            
-                    name="selectCategory"
-                    [(ngModel)]="selectedCategory"
-                    required>
-                    <!-- <option [ngValue]="null" value="" selected>Select category</option> -->
-                    <option *ngFor="let o of categoryOptions" value="o.value">{{o.name}}</option>
-                </select>
-            </div> <!-- formgroup: selectCategory -->
-            
-            <div class="form-group col-md-3">
-            <input
-                type="text"
-                id="searchTerm"
-                class="form-control"
-                ngModel
-                name="searchTerm"
-                required 
-                (input)="term = $event.target.value"
-                #searchTerm="ngModel">
-            <span class="help-block" *ngIf="!searchTerm.valid && searchTerm.touched">Please enter a search term!</span>
-            </div> <!-- formgroup: searchTerm -->                  
-            <div  col-md-3>
-                <button
-                    class="btn btn-primary"
-                    type="submit"
-                    [disabled]="!f.valid">Search
-                </button>
-            </div>
-        </div>
-    </form>    
-    <!-- {{f.valid}} -->
+        </form>  
     </div> <!-- formInput -->      
-</div> row
+</div> 
