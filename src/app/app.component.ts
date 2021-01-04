@@ -1,4 +1,5 @@
-import { Component, Injectable  } from '@angular/core';
+import { Component, ViewChild, Injectable  } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { DvdService } from './dvd.service';
 
 
@@ -9,14 +10,36 @@ import { DvdService } from './dvd.service';
 })
 export class AppComponent {
   title = 'Dvd Library Search';
-  
+  @ViewChild('f', { static: false }) searchForm: NgForm;
+  submitted = false;
+
   dvds = [];
 
   constructor(private dvd: DvdService) {}
 
-  onTerm(term: string) {
-    this.dvd.search(term).subscribe((response: any) => {
-      this.dvds = response.query.search;
-    });
+  onTerm(eventData: any) {
+
+    switch (eventData.selectedCategory) { 
+      case "title":
+        this.dvd.searchByTitle(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "year":
+        this.dvd.searchByReleaseYear(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "director":
+        this.dvd.searchByDirectorName(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+          break;
+      case "rating":
+        this.dvd.searchByRating(eventData.term).subscribe((response: any) => {
+          this.dvds = response;
+        });
+      break;
+    }
   }
 }
