@@ -17,7 +17,7 @@ export class AppComponent {
 
   constructor(private dvd: DvdService) {}
 
-  onTerm(eventData: any) {
+  onTerm(eventData: any) { //Search dvds based on selected Category
 
     switch (eventData.selectedCategory) { 
       case "title":

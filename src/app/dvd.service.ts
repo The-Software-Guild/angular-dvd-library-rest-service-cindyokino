@@ -29,4 +29,25 @@ export class DvdService {
     return this.http.get('http://localhost:8080/dvdapi/dvds/rating/' + term);
   }
 
+  // public createDvd(newDvd) {
+  //   return this.http.post('http://localhost:8080/dvdapi/dvd', {
+  //     Data : {
+  //       "id": newDvd.id,
+  //       "title": newDvd.title,
+  //       "releaseYear": newDvd.releaseYear,
+  //       "director": newDvd.director,
+  //       "rating": newDvd.rating,
+  //       "notes": newDvd.notes
+  //     }
+  //   });
+  // }
+
+  // public updateDvd(id, dvdData) {
+  //   return this.http.put('http://localhost:8080/dvdapi/dvd' + id);
+  // }
+
+  public deleteDvd(id: number) {
+    return this.http.delete('http://localhost:8080/dvdapi/dvd/' + id);
+  }
+
 }

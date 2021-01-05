@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DvdService } from '../dvd.service';
 
 @Component({
   selector: 'app-dvd-list',
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DvdListComponent implements OnInit {
   @Input() dvds = []; //Here, we set up an empty input array named dvds. This will store the results of the search.
 
-  constructor() { }
+  constructor(private dvd: DvdService) { }
 
   ngOnInit(): void {
   }
+
+  remove(id: number) {
+    this.dvd.deleteDvd(id).subscribe((response: any) => {});  
+  }       
 
 }
