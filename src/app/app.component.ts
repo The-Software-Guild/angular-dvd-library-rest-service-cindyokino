@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injectable  } from '@angular/core';
+import { Component, ViewChild, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DvdService } from './dvd.service';
 
@@ -12,13 +12,17 @@ export class AppComponent {
   title = 'Dvd Library Search';
   @ViewChild('f', { static: false }) searchForm: NgForm;
   submitted = false;
+  displayDvdList = false; 
+  displayCreateDvdForm = false;
 
   dvds = [];
 
   constructor(private dvd: DvdService) {}
 
+
   onTerm(eventData: any) { //Search dvds based on selected Category
 
+    this.displayDvdList = true;
     switch (eventData.selectedCategory) { 
       case "title":
         this.dvd.searchByTitle(eventData.term).subscribe((response: any) => {

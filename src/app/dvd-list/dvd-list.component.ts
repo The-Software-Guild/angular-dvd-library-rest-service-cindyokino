@@ -15,7 +15,28 @@ export class DvdListComponent implements OnInit {
   }
 
   remove(id: number) {
-    this.dvd.deleteDvd(id).subscribe((response: any) => {});  
-  }       
+    this.dvd.deleteDvd(id).subscribe((response: any) => {
+      console.log(id);
+      console.log(this.dvds);
+      let removedDvdIndex = this.findIndexOfDvdsById(id);
+
+      if (removedDvdIndex > -1) {
+        this.dvds.splice(removedDvdIndex, 1);
+      }
+    });  
+  }   
+  
+  edit(id: number) {
+
+  }
+
+  findIndexOfDvdsById(id): number {
+    for(var i = 0; i < this.dvds.length; i++) {
+        if(this.dvds[i].id === id) {
+            return i;
+        }
+    }
+    return -1;
+  }
 
 }

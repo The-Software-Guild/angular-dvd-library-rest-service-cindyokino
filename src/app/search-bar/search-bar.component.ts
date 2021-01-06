@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import {AppComponent} from '../app.component';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -11,15 +12,15 @@ export class SearchBarComponent implements OnInit {
   // @ViewChild('f', { static: false }) searchForm: NgForm;
   term = '';
   selectedCategory = '';
+  @Input() displayCreateDvdForm;
 
   categoryOptions = [
-    // { name: "Select category", value: "" },
     { name: "Title", value: "title" },
     { name: "Release year", value: "year" },
     { name: "Director name", value: "director" },
     { name: "Rating", value: "rating" }
   ]
-  
+    
   constructor() { }
 
   ngOnInit() { }
@@ -38,6 +39,14 @@ export class SearchBarComponent implements OnInit {
     
     this.submitted.emit(eventData);    
   }
+
+  create() { 
+    this.displayCreateDvdForm = true;
+    // this.should_open = true;
+    
+    // alert("Button is clicked");
+    console.log("CREATE BUTTON CLICKED!");
+ }
   
 
 }

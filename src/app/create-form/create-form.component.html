@@ -1,57 +1,3 @@
-<!-- <div class="row">
-    <div class="col-12" id='formInput'>
-        <form (submit)="onFormSubmit($event)" #f="ngForm">
-
-            <div
-                id="search-data"
-                ngModelGroup="searchData"
-                #userData="ngModelGroup"
-                class="row">
-                
-                <div class="form-group col-md-5">
-                    <button (click)="create()" type="button" class="btn btn-primary">Create DVD</button>    
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <select
-                        id="selectCategory"
-                        class="form-control"            
-                        name="selectCategory"
-                        [(ngModel)]="selectedCategory"
-                        (change)="onChange($event.target.value)"
-                        required>
-                        <option value="" selected disabled>Select category</option>
-                        <option value="{{o.value}}" *ngFor="let o of categoryOptions">{{ o.name }}</option>
-                    </select>
-                </div>
-                
-                <div class="form-group col-md-3">
-                    <input
-                        type="text"
-                        id="searchTerm"
-                        class="form-control"
-                        ngModel
-                        name="searchTerm"
-                        required 
-                        (input)="term = $event.target.value"
-                        #searchTerm="ngModel">
-                    <span class="help-block" *ngIf="!searchTerm.valid && searchTerm.touched">Please enter a search term!</span>
-                </div>   
-                
-                <div  class="form-group col-md-1">
-                    <button
-                        class="btn btn-primary"
-                        type="submit"
-                        [disabled]="!f.valid">Search
-                    </button>
-                </div>
-            </div>
-
-        </form>  
-    </div> 
-</div>  -->
-
-
 <div class="container">
     <h2 class="">{{ title }}</h2>
     <div class="row">
@@ -107,7 +53,7 @@
                     <select
                         id="rating"
                         class="form-control"
-                        [ngModel]="selectedRating"
+                        [ngModel]="defaultRating"
                         name="rating">
                         <option value="g" selected >G</option>
                         <option value="pg12">PG 12</option>
@@ -137,14 +83,14 @@
         </form>
         </div> <!-- formInput -->
 
-        <div class="col-6" id="displayData">
-        <!-- <div class="col-6" *ngIf="submitted" id="displayData"> -->
-            <h3>Added DVD:</h3>
-            <p>Title: {{ dvdTitle.value }}</p>
-            <p>Release Year: {{ releaseYear.value }}</p>
-            <p>Director:  {{ director.value }}</p>
-            <p>Rating : {{ selectedRating }}</p>
-            <p>Notes : {{ notes.value }}</p>
+        <div class="col-6" id="displayData" *ngIf="createdId">
+            <h3>Latest added DVD:</h3>
+            <p>Id: {{ createdDvd.id }}</p>
+            <p>Title: {{ createdDvd.dvdTitle }}</p>
+            <p>Release Year: {{ createdDvd.releaseYear }}</p>
+            <p>Director:  {{ createdDvd.director }}</p>
+            <p>Rating : {{ createdDvd.rating }}</p>
+            <p>Notes : {{ createdDvd.notes }}</p>
         </div> <!-- displayData -->
     </div> <!-- row -->
 </div> <!-- container -->
