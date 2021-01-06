@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DvdService {
+export class DvdService {  
+  public dvdListMaster  = new BehaviorSubject<any>([]);  // here where it reads "any", you can change it to the type you want
 
   constructor(private http: HttpClient) { }
+
+  public getAll() {
+    return this.http.get('http://localhost:8080/dvdapi/dvds');   
+  }
 
   public searchById(term: string) {
     return this.http.get('http://localhost:8080/dvdapi/dvd/' + term);   
@@ -39,9 +45,20 @@ export class DvdService {
     });
   }
 
-  // public updateDvd(id, dvdData) {
-  //   return this.http.put('http://localhost:8080/dvdapi/dvd' + id);
-  // }
+  editDvd(value: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  public updateDvd(id, dvdData) {
+    return this.http.put('http://localhost:8080/dvdapi/dvd' + id, {
+      "id": id,
+      "title": dvdData.dvdTitle,
+      "releaseYear": dvdData.releaseYear,
+      "director": dvdData.director,
+      "rating": dvdData.rating,
+      "notes": dvdData.notes
+     });
+  }
 
   public deleteDvd(id: number) {
     if(confirm("Are you sure you want to delete this DVD from your collection?")) {

@@ -2,7 +2,7 @@
     <h2 class="">{{ title }}</h2>
     <div class="row">
         <div class="col-6" id='formInput'>
-        <form (ngSubmit)="onAddformSubmit()" #f="ngForm">
+        <form (ngSubmit)="onAddFormSubmit()" #f="ngForm">
 
             <div
                 id="dvd-data"
@@ -80,17 +80,19 @@
             class="btn btn-primary"
             type="submit"
             [disabled]="!f.valid">Submit</button>
+
+            <a style="margin-left: 10px" href="/dvd-list"><button type="button" class="btn btn-danger">Cancel</button></a>
         </form>
         </div> <!-- formInput -->
 
-        <div class="col-6" id="displayData" *ngIf="createdId">
+        <div class="col-6" id="displayData" *ngIf="editedId">
             <h3>Latest added DVD:</h3>
-            <p>Id: {{ createdDvd.id }}</p>
-            <p>Title: {{ createdDvd.dvdTitle }}</p>
-            <p>Release Year: {{ createdDvd.releaseYear }}</p>
-            <p>Director:  {{ createdDvd.director }}</p>
-            <p>Rating : {{ createdDvd.rating }}</p>
-            <p>Notes : {{ createdDvd.notes }}</p>
+            <p>Id: {{ editedDvd.id }}</p>
+            <p>Title: {{ editedDvd.dvdTitle }}</p>
+            <p>Release Year: {{ editedDvd.releaseYear }}</p>
+            <p>Director:  {{ editedDvd.director }}</p>
+            <p>Rating : {{ editedDvd.rating }}</p>
+            <p>Notes : {{ editedDvd.notes }}</p>
         </div> <!-- displayData -->
     </div> <!-- row -->
 </div> <!-- container -->

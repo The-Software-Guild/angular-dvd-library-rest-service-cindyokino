@@ -1,0 +1,36 @@
+<div class="container">
+  <table class="table table-striped"> <!-- Here we define a table that will display the results of our search -->
+      <thead>
+        <tr>
+          <th scope="col">Title</th> <!-- The DVD titles are links that load a details view -->
+          <th scope="col">Release Date</th>
+          <th scope="col">Director</th>
+          <th scope="col">Rating</th>
+          <th scope="col"></th> <!-- unlabeled column whose rows contain edit and delete elements -->
+        </tr>
+      </thead>    
+      <!-- we reference the dvds created in the component class 
+      and we use *NgFor to loop through the results and display individual dvds in separate rows of the table. -->
+      <tbody> 
+        <tr *ngFor="let dvd of localDvdsList" scope="row"> 
+          <td>
+            <!-- we build a hyperlink for each dvd using the root address 'http://localhost:8080/dvdapi/dvd/' concatenated with the dvd ID -->
+            <a
+              target="_blank"
+              [href]="'http://localhost:8080/dvdapi/dvd/' + dvd.id" 
+            > 
+              {{ dvd.title }}
+            </a>
+          </td>
+          <td>{{ dvd.releaseYear }}</td>
+          <td>{{ dvd.director }}</td>
+          <td>{{ dvd.rating }}</td>
+          <td>
+            <!-- <button (click)="edit(dvd.id)" class="btn btn-outline-secondary btn-sm">Edit</button>   -->
+            <a href="/edit-form"><button (click)="edit()" type="button" class="btn btn-outline-secondary btn-sm">Edit</button></a>             
+            <button style="margin-left: 10px" (click)="remove(dvd.id)" class="btn btn-danger btn-sm">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

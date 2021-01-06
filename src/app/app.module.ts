@@ -3,22 +3,23 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DvdListComponent } from './dvd-list/dvd-list.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
-import { CreateFormComponent } from './create-form/create-form.component';
+
+import { CreateFormModule } from './create-form/create-form.module';
+import { DvdListModule } from './dvd-list/dvd-list.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DvdListComponent,
-    SearchBarComponent,
-    CreateFormComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    CreateFormModule,
+    DvdListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

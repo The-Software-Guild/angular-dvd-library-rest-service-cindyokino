@@ -1,6 +1,7 @@
-import { Component, ViewChild, Injectable } from '@angular/core';
+import { Component, ViewChild, Injectable, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DvdService } from './dvd.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,42 +9,71 @@ import { DvdService } from './dvd.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Dvd Library Search';
   @ViewChild('f', { static: false }) searchForm: NgForm;
-  submitted = false;
-  displayDvdList = false; 
-  displayCreateDvdForm = false;
+  @Output() submitted = new EventEmitter<any>();
+  term = '';
+  selectedCategory = '';
 
   dvds = [];
 
-  constructor(private dvd: DvdService) {}
+  categoryOptions = [
+    { name: "Title", value: "title" },
+    { name: "Release year", value: "year" },
+    { name: "Director name", value: "director" },
+    { name: "Rating", value: "rating" }
+  ]
 
+  constructor(private dvdService: DvdService, private router: Router) {}
+  
+  ngOnInit() { }
 
   onTerm(eventData: any) { //Search dvds based on selected Category
 
-    this.displayDvdList = true;
     switch (eventData.selectedCategory) { 
       case "title":
-        this.dvd.searchByTitle(eventData.term).subscribe((response: any) => {
-          this.dvds = response;
+        this.dvdService.searchByTitle(eventData.term).subscribe((response: any) => {
+          this.dvdService.dvdListMaster.next(response);
         });
           break;
       case "year":
-        this.dvd.searchByReleaseYear(eventData.term).subscribe((response: any) => {
-          this.dvds = response;
+        this.dvdService.searchByReleaseYear(eventData.term).subscribe((response: any) => {
+          this.dvdService.dvdListMaster.next(response);
         });
           break;
       case "director":
-        this.dvd.searchByDirectorName(eventData.term).subscribe((response: any) => {
-          this.dvds = response;
+        this.dvdService.searchByDirectorName(eventData.term).subscribe((response: any) => {
+          this.dvdService.dvdListMaster.next(response);
         });
           break;
       case "rating":
-        this.dvd.searchByRating(eventData.term).subscribe((response: any) => {
-          this.dvds = response;
+        this.dvdService.searchByRating(eventData.term).subscribe((response: any) => {
+          this.dvdService.dvdListMaster.next(response);
         });
       break;
     }
   }
+
+  onChange(option){
+    console.info("Selected:",option);
+    this.selectedCategory = option; 
+  }
+
+  onFormSubmit(event: any) {
+    event.preventDefault();
+    let eventData = {
+      term: this.term,
+      selectedCategory: this.selectedCategory
+    };
+    
+    // this.submitted.emit(eventData); 
+    this.onTerm(eventData);   
+  }
+
+  create() { 
+    this.router.navigate(['/create-form']); 
+    console.log("CREATE BUTTON CLICKED!");
+ }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DvdService } from '../dvd.service';
+import { DvdService } from 'src/app/dvd.service';
 
 @Component({
   selector: 'app-create-form',
@@ -12,6 +12,7 @@ export class CreateFormComponent implements OnInit {
   @ViewChild('f', { static: false }) createDvd: NgForm;
   defaultRating='g';
   createdId=null;
+  submitted = false;
   createdDvd = {
     id: '',
     dvdTitle: '',
@@ -26,7 +27,7 @@ export class CreateFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddformSubmit() {
+  onAddFormSubmit() {
     this.dvd.createDvd(this.createDvd.value).subscribe((response: any) => { 
       console.log(response);
       this.createdId = response.id;
