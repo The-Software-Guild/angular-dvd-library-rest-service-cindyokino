@@ -49,7 +49,7 @@ export class DvdService {
   }
 
   public updateDvd(dvdData) {
-    return this.http.put('http://localhost:8080/dvd/' + dvdData.dvdData.dvdId, {
+    return this.http.put('https://tsg-dvds.herokuapp.com/dvd/' + dvdData.dvdData.dvdId, {
       "id": dvdData.dvdData.dvdId,
       "title": dvdData.dvdData.dvdTitle,
       "releaseYear": dvdData.dvdData.releaseYear,
@@ -61,7 +61,7 @@ export class DvdService {
 
   public deleteDvd(id: number) {
     if(confirm("Are you sure you want to delete this DVD from your collection?")) {
-      return this.http.delete('http://localhost:8080/dvd/' + id);
+      return this.http.delete('https://tsg-dvds.herokuapp.com/dvd/' + id);
     }
   }
 
