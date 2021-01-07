@@ -7,7 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CreateFormModule } from './create-form/create-form.module';
+import { EditFormModule } from './edit-form/edit-form.module';
 import { DvdListModule } from './dvd-list/dvd-list.module';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { DvdListModule } from './dvd-list/dvd-list.module';
     HttpClientModule,
     AppRoutingModule,
     CreateFormModule,
+    EditFormModule,
     DvdListModule
   ],
   providers: [],

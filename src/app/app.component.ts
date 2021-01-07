@@ -65,10 +65,10 @@ export class AppComponent implements OnInit {
     let eventData = {
       term: this.term,
       selectedCategory: this.selectedCategory
-    };
-    
-    // this.submitted.emit(eventData); 
+    };    
     this.onTerm(eventData);   
+    this.searchForm.reset();
+    this.selectedCategory = '';
   }
 
   create() { 

@@ -10,7 +10,7 @@ import { DvdService } from 'src/app/dvd.service';
 export class CreateFormComponent implements OnInit {
   title = 'Add a DVD';
   @ViewChild('f', { static: false }) createDvd: NgForm;
-  defaultRating='g';
+  defaultRating='G';
   createdId=null;
   submitted = false;
   createdDvd = {
@@ -22,13 +22,13 @@ export class CreateFormComponent implements OnInit {
     notes: ''
   };
 
-  constructor(private dvd: DvdService) { }
+  constructor(private dvdService: DvdService) { }
 
   ngOnInit(): void {
   }
 
   onAddFormSubmit() {
-    this.dvd.createDvd(this.createDvd.value).subscribe((response: any) => { 
+    this.dvdService.createDvd(this.createDvd.value).subscribe((response: any) => { 
       console.log(response);
       this.createdId = response.id;
       alert("DVD created!");

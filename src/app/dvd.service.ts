@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -8,6 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DvdService {  
   public dvdListMaster  = new BehaviorSubject<any>([]);  // here where it reads "any", you can change it to the type you want
+  public dvdToEdit  = new BehaviorSubject<any>(null);
+  id: any;
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +17,8 @@ export class DvdService {
     return this.http.get('http://localhost:8080/dvdapi/dvds');   
   }
 
-  public searchById(term: string) {
-    return this.http.get('http://localhost:8080/dvdapi/dvd/' + term);   
+  public getById(id: number) {
+    return this.http.get('http://localhost:8080/dvdapi/dvd/' + id);   
   }
 
   public searchByTitle(term: string) {
@@ -45,18 +47,14 @@ export class DvdService {
     });
   }
 
-  editDvd(value: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  public updateDvd(id, dvdData) {
-    return this.http.put('http://localhost:8080/dvdapi/dvd' + id, {
-      "id": id,
-      "title": dvdData.dvdTitle,
-      "releaseYear": dvdData.releaseYear,
-      "director": dvdData.director,
-      "rating": dvdData.rating,
-      "notes": dvdData.notes
+  public updateDvd(dvdData) {
+    return this.http.put('http://localhost:8080/dvdapi/dvd/' + dvdData.dvdData.dvdId, {
+      "id": dvdData.dvdData.dvdId,
+      "title": dvdData.dvdData.dvdTitle,
+      "releaseYear": dvdData.dvdData.releaseYear,
+      "director": dvdData.dvdData.director,
+      "rating": dvdData.dvdData.rating,
+      "notes": dvdData.dvdData.notes
      });
   }
 

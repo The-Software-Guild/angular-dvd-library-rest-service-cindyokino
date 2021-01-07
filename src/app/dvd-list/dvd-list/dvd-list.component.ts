@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { DvdService } from 'src/app/dvd.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { DvdService } from 'src/app/dvd.service';
 export class DvdListComponent implements OnInit {
   public localDvdsList = []; //Here, we set up an empty input array named dvds. This will store the results of the search.
   
-  constructor(private dvdService: DvdService) { }
+  constructor(private dvdService: DvdService, private router: Router) { }
 
   ngOnInit(): void {
     this.dvdService.getAll().subscribe((response: any) => { //load all DVDs initially with the dvd-list view
@@ -31,8 +32,13 @@ export class DvdListComponent implements OnInit {
     });  
   }   
   
-  edit(id: number) {
+  edit(dvd: any) {
+      this.dvdService.dvdToEdit.next(dvd);
 
+      console.log("Edit DVD id: " + dvd.id);
+      console.log(this.dvdService.dvdToEdit);
+
+      this.router.navigate(['/edit-form']); //IMPORTANT - ALWAYS REDIRECT WITH THIS router.navigate INSTEAD OF href="/xxx"
   }
 
   findIndexOfDvdsById(id): number {

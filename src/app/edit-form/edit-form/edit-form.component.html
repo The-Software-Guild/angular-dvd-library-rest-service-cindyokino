@@ -2,21 +2,29 @@
     <h2 class="">{{ title }}</h2>
     <div class="row">
         <div class="col-6" id='formInput'>
-        <form (ngSubmit)="onAddFormSubmit()" #f="ngForm">
-
+        <form (ngSubmit)="onUpdateFormSubmit()" #f="ngForm" *ngIf="dvd">
+            
             <div
                 id="dvd-data"
                 ngModelGroup="dvdData"
                 #dvdData="ngModelGroup">
+                <input
+                    type="text"
+                    name="dvdId"                    
+                    [ngModel]="dvd.id"
+                    id="dvdId"
+                    class="form-control"
+                    #dvdId="ngModel"
+                    hidden>
 
                 <div class="form-group">
                 <label for="dvdTitle">DVD Title</label>
                 <input
                     type="text"
+                    name="dvdTitle"
+                    [ngModel]="dvd.title"
                     id="dvdTitle"
                     class="form-control"
-                    ngModel
-                    name="dvdTitle"
                     required
                     #dvdTitle="ngModel">
                     <span class="help-block" *ngIf="!dvdTitle.valid && dvdTitle.touched">Please enter a title!</span>
@@ -26,10 +34,10 @@
                 <label for="releaseYear">Release Year</label>
                 <input
                     type="text"
+                    name="releaseYear" 
+                    [ngModel]="dvd.releaseYear"                               
                     id="releaseYear"
-                    class="form-control"
-                    ngModel
-                    name="releaseYear"                                
+                    class="form-control"                    
                     #releaseYear="ngModel"
                     maxlength="4"
                     minlength="4"                    
@@ -41,10 +49,10 @@
                 <label for="director">Director</label>
                 <input
                     type="text"
+                    name="director"   
+                    [ngModel]="dvd.director"                             
                     id="director"
-                    class="form-control"
-                    ngModel
-                    name="director"                                
+                    class="form-control"                    
                     #director="ngModel">
                 </div> <!-- formgroup: director -->
 
@@ -53,7 +61,7 @@
                     <select
                         id="rating"
                         class="form-control"
-                        [ngModel]="defaultRating"
+                        [ngModel]="dvd.rating"
                         name="rating">
                         <option value="g" selected >G</option>
                         <option value="pg12">PG 12</option>
@@ -68,7 +76,7 @@
                     id="notes"
                     rows="3"
                     class="form-control"
-                    ngModel
+                    [ngModel]="dvd.notes" 
                     name="notes"
                     #notes="ngModel"></textarea>
                 </div> <!-- formgroup: notes -->         

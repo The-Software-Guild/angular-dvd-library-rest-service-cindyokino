@@ -1,18 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DvdService } from 'src/app/dvd.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-edit-form',
   templateUrl: './edit-form.component.html',
   styleUrls: ['./edit-form.component.css']
 })
-export class EditFormComponent implements OnInit {
-  title = 'Add a DVD';
+export class EditFormComponent implements AfterViewInit {
+  title = 'Update DVD';
   @ViewChild('f', { static: false }) editDvd: NgForm;
-  defaultRating='g';
+  defaultRating='G';
   editedId=null;
   submitted = false;
+  dvd = null;
+
   editedDvd = {
     id: '',
     dvdTitle: '',
@@ -22,24 +26,27 @@ export class EditFormComponent implements OnInit {
     notes: ''
   };
 
-  constructor(private dvd: DvdService) { }
+  constructor(private dvdService: DvdService, private router: Router) {
+    this.init();
+   }
 
-  ngOnInit(): void {
+  init(): void {
+    this.dvdService.dvdToEdit.subscribe(data => {
+      console.log(data);
+      this.dvd = data;
+    });
   }
 
-  onAddFormSubmit() {
-    this.dvd.editDvd(this.editDvd.value).subscribe((response: any) => { 
-      console.log(response);
-      this.editedId = response.id;
-      alert("DVD edited!");
+  ngAfterViewInit() {
 
-      this.editedDvd.id = response.id;
-      this.editedDvd.dvdTitle = response.title;
-      this.editedDvd.releaseYear = response.releaseYear;
-      this.editedDvd.director = response.director;
-      this.editedDvd.rating = response.rating;
-      this.editedDvd.notes = response.notes;
-      this.editedDvd.reset();
+  }
+
+  onUpdateFormSubmit() {
+    this.dvdService.updateDvd(this.editDvd.value).subscribe((response: any) => { 
+      console.log(response);
+      alert("DVD edited!");
+      this.editDvd.reset();
+      this.router.navigate(['/dvd-list']); //IMPORTANT - ALWAYS REDIRECT WITH THIS router.navigate INSTEAD OF href="/xxx"
     }); 
   }
 
