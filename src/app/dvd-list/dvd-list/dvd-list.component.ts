@@ -41,6 +41,15 @@ export class DvdListComponent implements OnInit {
       this.router.navigate(['/edit-form']); //IMPORTANT - ALWAYS REDIRECT WITH THIS router.navigate INSTEAD OF href="/xxx"
   }
 
+  details(dvd: any) {
+    this.dvdService.dvdInfo.next(dvd);
+
+    console.log("Edit DVD id: " + dvd.id);
+    console.log(this.dvdService.dvdInfo);
+
+    this.router.navigate(['/dvd-detail']); //IMPORTANT - ALWAYS REDIRECT WITH THIS router.navigate INSTEAD OF href="/xxx"
+}
+
   findIndexOfDvdsById(id): number {
     for(var i = 0; i < this.localDvdsList.length; i++) {
         if(this.localDvdsList[i].id === id) {

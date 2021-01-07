@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { CreateFormModule } from './create-form/create-form.module';
 import { EditFormModule } from './edit-form/edit-form.module';
 import { DvdListModule } from './dvd-list/dvd-list.module';
+import { DvdDetailModule } from './dvd-detail/dvd-detail.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DvdListModule } from './dvd-list/dvd-list.module';
     AppRoutingModule,
     CreateFormModule,
     EditFormModule,
-    DvdListModule
+    DvdListModule,
+    DvdDetailModule
   ],
   providers: [],
   bootstrap: [AppComponent]

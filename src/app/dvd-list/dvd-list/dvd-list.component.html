@@ -15,19 +15,14 @@
         <tr *ngFor="let dvd of localDvdsList" scope="row"> 
           <td>
             <!-- we build a hyperlink for each dvd using the root address 'http://localhost:8080/dvdapi/dvd/' concatenated with the dvd ID -->
-            <a
-              target="_blank"
-              [href]="'http://localhost:8080/dvdapi/dvd/' + dvd.id" 
-            > 
-              {{ dvd.title }}
-            </a>
+            <button (click)="details(dvd)" type="button" class="btn">{{ dvd.title }}</button>
           </td>
           <td>{{ dvd.releaseYear }}</td>
           <td>{{ dvd.director }}</td>
           <td>{{ dvd.rating }}</td>
           <td>
             <!-- <button (click)="edit(dvd.id)" class="btn btn-outline-secondary btn-sm">Edit</button>   -->
-            <span><button (click)="edit(dvd)" type="button" class="btn btn-outline-secondary btn-sm">Edit</button></span>             
+            <button (click)="edit(dvd)" type="button" class="btn btn-outline-secondary btn-sm">Edit</button>             
             <button style="margin-left: 10px" (click)="remove(dvd.id)" class="btn btn-danger btn-sm">Delete</button>
           </td>
         </tr>

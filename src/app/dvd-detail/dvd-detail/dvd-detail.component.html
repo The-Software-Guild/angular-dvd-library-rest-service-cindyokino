@@ -1,0 +1,79 @@
+<div class="container">
+    <h2 class="">{{ title }}</h2>
+    <div class="row">
+        <div class="col-6" id='formInput'>
+        <form (ngSubmit)="onUpdateFormSubmit()" #f="ngForm" *ngIf="dvd">
+            
+            <div
+                id="dvd-data"
+                ngModelGroup="dvdData"
+                #dvdData="ngModelGroup">
+                <input
+                    type="text"
+                    name="dvdId"                    
+                    [ngModel]="dvd.id"
+                    id="dvdId"
+                    class="form-control"
+                    #dvdId="ngModel"
+                    hidden>
+
+                <div class="form-group">
+                <label for="dvdTitle">DVD Title</label>
+                <input
+                    readonly
+                    name="dvdTitle"
+                    [ngModel]="dvd.title"
+                    class="form-control">
+                </div> <!-- formgroup: dvdTitle -->
+
+                <div class="form-group">
+                <label for="releaseYear">Release Year</label>
+                <input
+                    readonly
+                    name="releaseYear" 
+                    [ngModel]="dvd.releaseYear"                               
+                    class="form-control">
+                </div> <!-- formgroup: releaseYear -->
+
+                <div class="form-group">
+                <label for="director">Director</label>
+                <input
+                    readonly
+                    name="director"   
+                    [ngModel]="dvd.director"                             
+                    class="form-control">
+                </div> <!-- formgroup: director -->
+
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select
+                        readonly
+                        class="form-control"
+                        [ngModel]="dvd.rating"
+                        name="rating">
+                        <option value="g" selected >G</option>
+                        <option value="pg12">PG 12</option>
+                        <option value="r15+">R 15+</option>
+                        <option value="r18+">R 18+</option>
+                    </select>
+                </div> <!-- formgroup: rating -->
+            
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea
+                    readonly
+                    rows="3"
+                    class="form-control"
+                    [ngModel]="dvd.notes" 
+                    name="notes"></textarea>
+                </div> <!-- formgroup: notes -->         
+                
+            </div> <!-- #dvdData-->
+            <!-- <p *ngIf="!dvdData.valid">DVD Data is invalid!</p> -->    
+
+            <a style="margin-left: 10px" href="/dvd-list"><button type="button" class="btn btn-outline-secondary">Back</button></a>
+        </form>
+        </div> <!-- formInput -->
+        
+    </div> <!-- row -->
+</div> <!-- container -->

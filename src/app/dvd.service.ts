@@ -9,6 +9,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class DvdService {  
   public dvdListMaster  = new BehaviorSubject<any>([]);  // here where it reads "any", you can change it to the type you want
   public dvdToEdit  = new BehaviorSubject<any>(null);
+  public dvdInfo  = new BehaviorSubject<any>(null);
   id: any;
 
   constructor(private http: HttpClient) { }
