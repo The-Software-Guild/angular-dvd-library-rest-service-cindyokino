@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DvdService } from 'src/app/dvd.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-form',
@@ -22,7 +24,7 @@ export class CreateFormComponent implements OnInit {
     notes: ''
   };
 
-  constructor(private dvdService: DvdService) { }
+  constructor(private dvdService: DvdService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +42,8 @@ export class CreateFormComponent implements OnInit {
       this.createdDvd.rating = response.rating;
       this.createdDvd.notes = response.notes;
       this.createDvd.reset();
+      this.router.navigate(['/dvd-list']); //IMPORTANT - ALWAYS REDIRECT WITH THIS router.navigate INSTEAD OF href="/xxx"
+
     }); 
   }
 
