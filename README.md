@@ -4,7 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # DVD API: Dvd REST Project
 
+### Original repo
 https://github.com/KeLu-Dev/DvdProject
+
+### Public repo
+https://github.com/cindyokino/DVD-rest-project
 
 ## Development server
 
