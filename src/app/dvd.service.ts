@@ -15,31 +15,31 @@ export class DvdService {
   constructor(private http: HttpClient) { }
 
   public getAll() {
-    return this.http.get('http://localhost:8080/dvdapi/dvds');   
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvds');   
   }
 
   public getById(id: number) {
-    return this.http.get('http://localhost:8080/dvdapi/dvd/' + id);   
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvd/' + id);   
   }
 
   public searchByTitle(term: string) {
-    return this.http.get('http://localhost:8080/dvdapi/dvds/title/' + term);
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvds/title/' + term);
   }
 
   public searchByReleaseYear(term: string) {
-    return this.http.get('http://localhost:8080/dvdapi/dvds/year/' + term);
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvds/year/' + term);
   }
 
   public searchByDirectorName(term: string) {
-    return this.http.get('http://localhost:8080/dvdapi/dvds/director/' + term);
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvds/director/' + term);
   }
 
   public searchByRating(term: string) {
-    return this.http.get('http://localhost:8080/dvdapi/dvds/rating/' + term);
+    return this.http.get('https://tsg-dvds.herokuapp.com/dvds/rating/' + term);
   }
 
   public createDvd(newDvd) {
-    return this.http.post('http://localhost:8080/dvdapi/dvd', {
+    return this.http.post('https://tsg-dvds.herokuapp.com/dvd', {
         "title": newDvd.dvdData.dvdTitle,
         "releaseYear": newDvd.dvdData.releaseYear,
         "director": newDvd.dvdData.director,
@@ -49,7 +49,7 @@ export class DvdService {
   }
 
   public updateDvd(dvdData) {
-    return this.http.put('http://localhost:8080/dvdapi/dvd/' + dvdData.dvdData.dvdId, {
+    return this.http.put('http://localhost:8080/dvd/' + dvdData.dvdData.dvdId, {
       "id": dvdData.dvdData.dvdId,
       "title": dvdData.dvdData.dvdTitle,
       "releaseYear": dvdData.dvdData.releaseYear,
@@ -61,7 +61,7 @@ export class DvdService {
 
   public deleteDvd(id: number) {
     if(confirm("Are you sure you want to delete this DVD from your collection?")) {
-      return this.http.delete('http://localhost:8080/dvdapi/dvd/' + id);
+      return this.http.delete('http://localhost:8080/dvd/' + id);
     }
   }
 
